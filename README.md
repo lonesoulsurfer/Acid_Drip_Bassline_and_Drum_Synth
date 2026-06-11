@@ -161,7 +161,7 @@ Pot pickup prevents value jumps when grabbing a control. Per-drum settings reset
 | MPNT | Midpoint (DrumKid randomness centre) |
 | TMPO | Tempo (independent of acid tempo) |
 | SWNG | Swing amount |
-| STEP | Drum step divider — fires every Nth acid step (e.g. 2 = half time) |
+| STEP | Drum step divider - fires every Nth acid step (e.g. 2 = half time) |
 
 ### Preset Patterns
 
@@ -178,7 +178,7 @@ GP2 is shared between drum audio output and external sync clock input. A physica
 - **Drum mode (default):** GP2 is claimed by PWMAudio DMA and outputs drum audio. Switch in the DRUMS position.
 - **Sync In mode:** Hold **pad 16** at power-on. GP2 is configured as a digital input and listens for an external clock pulse. Switch in the SYNC position.
 
-The boot screen confirms which mode was detected — green "DRUM MODE" or cyan "SYNC IN MODE".
+The boot screen confirms which mode was detected - green "DRUM MODE" or cyan "SYNC IN MODE".
 
 > The switch position and held pad must match. If the switch is in SYNC position but the device boots into drum mode, GP2 will try to drive audio into the sync signal line.
 
