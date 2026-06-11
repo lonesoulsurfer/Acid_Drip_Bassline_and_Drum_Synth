@@ -13,10 +13,11 @@ An RP2040-based acid bassline synthesizer and drum machine built on the Mozzi au
 | MCU | RP2040 (Raspberry Pi Pico or equivalent) |
 | Display | ILI9341 320×240 TFT |
 | Pads | 16× Cherry MX switches (2 rows of 8) |
-| Pots | 3× analog (CUT, RES, DECAY) |
+| Pots | 4× analog (CUT, RES, DECAY, MIX) |
 | Audio out (acid) | GP15 → 100Ω + 10nF RC filter → 3.5mm jack |
 | Audio out (drums) | GP2 → 470Ω resistor → 3.5mm jack |
 | Sync in | GP2 (hardware SPDT switch selects drum audio OR sync input) |
+
 
 ### Wiring
 
