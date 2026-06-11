@@ -196,7 +196,7 @@ The two cores communicate via the RP2040 inter-core FIFO. All SPI/TFT calls happ
 
 ## Credits
 
-- Acid synthesis engine adapted from *Badass Bass*
-- Drum engine ported from **DrumKid** by Matt Bradshaw
+- Acid synthesis engine adapted from *Badass Bass*  https://www.youtube.com/watch?v=MvDILHYImc4
+- Drum engine ported from **DrumKid** by Matt Bradshaw  https://www.youtube.com/watch?v=509iZGjnVhM
 - Built with the [Mozzi](https://sensorium.github.io/Mozzi/) audio library
 - Hardware design and firmware by Marcus ([lonesoulsurfer](https://github.com/lonesoulsurfer))
