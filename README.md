@@ -1,4 +1,4 @@
-# Acid Drip
+# Acid Drip Bassline Synth & Drum Machine
 
 Youtube Video (click the image) - [![Acid Drip Demo](https://img.youtube.com/vi/anotb2mvv04/maxresdefault.jpg)](https://youtu.be/anotb2mvv04) 
 
