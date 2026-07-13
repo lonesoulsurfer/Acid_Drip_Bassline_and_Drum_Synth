@@ -11,13 +11,6 @@ NOTE: V5 firmware adds pattern chaining -- link the 4 save slots into a longer p
 
 ![Platform](https://img.shields.io/badge/platform-RP2040-blue) ![IDE](https://img.shields.io/badge/IDE-Arduino-teal) ![Audio](https://img.shields.io/badge/audio-Mozzi-green)
 
-<p align="center">
-  <img src="DVJM1456.JPG" width="32%" alt="Acid Drip - angle view on cyan" />
-  &nbsp;
-  <img src="KKUL8226.JPG" width="32%" alt="Acid Drip - front view on orange" />
-  &nbsp;
-  <img src="CHRJ9214.JPG" width="32%" alt="Acid Drip - perspective view on green" />
-</p>
 
 ---
 
