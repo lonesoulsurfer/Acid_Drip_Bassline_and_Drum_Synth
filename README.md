@@ -9,7 +9,7 @@ NOTE: the images of the synth are V1. V2 is what I have provided in this repo an
 
 NOTE: V5 firmware adds pattern chaining -- link the 4 save slots into a longer playback sequence, in any order, with repeats. See Pattern Chaining under the Acid Synthesizer section below.
 
-![Platform](https://img.shields.io/badge/platform-RP2040-blue) ![IDE](https://img.shields.io/badge/IDE-Arduino-teal) ![Audio](https://img.shields.io/badge/audio-Mozzi-green)
+
 
 <p align="center">
   <img src="DVJM1456.JPG" width="32%" alt="Acid Drip - angle view on cyan" />
