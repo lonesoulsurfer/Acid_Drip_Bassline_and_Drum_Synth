@@ -1,0 +1,4 @@
+*.kicad_pcb.lck
+*.kicad_pro.lck
+*.kicad_sch.lck
+.DS_Store
