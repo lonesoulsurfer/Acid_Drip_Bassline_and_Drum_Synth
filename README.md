@@ -101,7 +101,7 @@ V5 adds a second synth voice (DRIFT), pattern chaining, per engine level mixing 
 |    1    |    2    |    3    |    4    |    5    |    6    |    7    |    8    |
 +---------+---------+---------+---------+---------+---------+---------+---------+
 |    9    |   10    |   11    |   12    |   13    |   14    |   15    |   16    |
-|   KEY   |  RIFF   |  SOUND  |  WALK   |   FX    |  TEMPO  |  PLEN   |  PAT>  |
+|   KEY   |  RIFF   |  SOUND  |  WALK   |   FX    |  TEMPO  |  PLEN   |  PAT>   |
 +---------+---------+---------+---------+---------+---------+---------+---------+
   (bottom row labels show only in FUNC mode)
 ```
