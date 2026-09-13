@@ -67,7 +67,7 @@ Board package: **Raspberry Pi Pico/RP2040** (Earle Philhower core)
 
 This repo has two firmware versions, each in its own folder. They are separate sketches, not meant to be merged.
 
-### V4 (`Acid_Drip_V4_Drum_Acid`)
+### V4 (`Acid_Drip_Drum_Acid_V4`)
 
 | File | Description |
 |------|-------------|
@@ -76,7 +76,7 @@ This repo has two firmware versions, each in its own folder. They are separate s
 | `beats.h` | 16 preset drum patterns (techno, house, hip-hop, etc.) |
 | `sample0-7.h` | Drum samples stored as int8 arrays in flash (PROGMEM) |
 
-### V5 (`Acid_Drip_V5_Drum_Acid_Drift`)
+### V5 (`Acid_Drip_Drum_Acid_Drift_V5`)
 
 | File | Description |
 |------|-------------|
