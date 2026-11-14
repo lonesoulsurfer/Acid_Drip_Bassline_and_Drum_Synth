@@ -1,0 +1,88 @@
+name: Build firmware
+
+# What this workflow does:
+# - On every push, it compiles each sketch folder in src/ to a .uf2 file.
+#   If a sketch does not compile, the workflow fails and publishes nothing.
+# - On a push to main: if the number in the VERSION file has no release yet,
+#   it publishes release v<VERSION> with the .uf2 files and the notes for that
+#   version from CHANGELOG.md.
+# - On other branches, and with "Run workflow" on the Actions tab, it only
+#   makes a test build. Download it from the "Artifacts" box of the run.
+#
+# The board settings are the same as the Arduino IDE settings in the README.
+
+on:
+  push:
+    paths: ['src/**', 'VERSION', 'CHANGELOG.md', '.github/workflows/build.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FQBN: rp2040:rp2040:rpipico:flash=2097152_0,freq=200,opt=Small,usbstack=picosdk,dbgport=Disabled,dbglvl=None,exceptions=Disabled,rtti=Disabled,stackprotect=Disabled,os=none,ipbtstack=ipv4only
+  CORE_URL: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: arduino/setup-arduino-cli@v2
+
+      - name: Install the RP2040 board package and the libraries
+        run: |
+          arduino-cli core update-index --additional-urls "$CORE_URL"
+          arduino-cli core install rp2040:rp2040 --additional-urls "$CORE_URL"
+          arduino-cli lib install "Mozzi" "Adafruit GFX Library" "Adafruit ILI9341"
+          arduino-cli core list > versions.txt
+          arduino-cli lib list >> versions.txt
+          cat versions.txt
+
+      - name: Which version is this, and is it released yet?
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ver=$(tr -d ' \r\n' < VERSION)
+          publish=no
+          if [ "$GITHUB_EVENT_NAME" = push ] && [ "$GITHUB_REF" = refs/heads/main ]; then
+            gh release view "v$ver" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1 || publish=yes
+          fi
+          echo "VER=$ver" >> "$GITHUB_ENV"
+          echo "PUBLISH=$publish" >> "$GITHUB_ENV"
+          # The section "## <version>" of CHANGELOG.md becomes the release notes.
+          awk -v v="## $ver" '/^## /{ if (on) exit; on = ($0 == v); next } on' CHANGELOG.md > notes.md
+          [ -s notes.md ] || echo "Version $ver." > notes.md
+          echo "Version $ver, publish: $publish"
+
+      - name: Compile each sketch in src/
+        run: |
+          mkdir -p out
+          tag=$([ "$PUBLISH" = yes ] && echo "v$VER" || echo "test-${GITHUB_SHA::7}")
+          for dir in src/*/; do
+            name=$(basename "$dir")
+            [ -f "$dir/$name.ino" ] || continue
+            echo "::group::$name"
+            arduino-cli compile --fqbn "$FQBN" --output-dir "build/$name" "$dir"
+            cp "build/$name/$name.ino.uf2" "out/$name-$tag.uf2"
+            echo "::endgroup::"
+          done
+          ls -l out
+          [ -n "$(ls out)" ] || { echo "No sketch was built."; exit 1; }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: acid-drip-firmware
+          path: out/*.uf2
+
+      - name: Publish the release
+        if: env.PUBLISH == 'yes'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VER }}
+          target_commitish: ${{ github.sha }}
+          name: Acid Drip ${{ env.VER }}
+          body_path: notes.md
+          files: out/*.uf2
+          make_latest: true

@@ -1,0 +1,18 @@
+# KiCad: automatic backups, caches, lock files and local settings
+*-backups/
+fp-info-cache
+*.kicad_prl
+*.lck
+~*
+_autosave-*
+*.bak
+
+# Arduino: build output
+build/
+*.elf
+*.map
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
