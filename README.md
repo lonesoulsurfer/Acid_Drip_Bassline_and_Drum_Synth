@@ -20,7 +20,9 @@ Acid Drip is a DIY groovebox with three instruments: a 16-step acid bassline syn
 
 > **Warning:** Do not use **Code → Download ZIP** to get the firmware. That ZIP has the source code only. It does not have the `.uf2` file. Get the `.uf2` file from the [latest release](https://github.com/lonesoulsurfer/Acid_Drip_Bassline_and_Drum_Synth/releases/latest).
 
-## Video
+## Build guide and video
+
+The full build guide, with photos of each step, is on Instructables: [Acid Drip on Instructables](https://www.instructables.com/Acid-Drip-a-Acid-Bassline-Synth-Running-on-a-Raspb/).
 
 [![Acid Drip demo video](https://img.youtube.com/vi/anotb2mvv04/maxresdefault.jpg)](https://youtu.be/anotb2mvv04)
 
