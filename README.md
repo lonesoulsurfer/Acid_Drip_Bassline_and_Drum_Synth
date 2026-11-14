@@ -68,17 +68,54 @@ Bottom row pads (steps 9-16 / FUNC select):
   - **Adafruit GFX Library**
   - **Adafruit ILI9341**
 
-## Install the firmware (easy method)
+## Install the firmware
 
-1. Download the `.uf2` file from the [latest release](https://github.com/lonesoulsurfer/Acid_Drip_Bassline_and_Drum_Synth/releases/latest).
-2. Disconnect the Pico from the USB cable.
-3. Push and hold the **BOOTSEL** button on the Pico.
-4. Connect the USB cable to your computer.
-5. Release the **BOOTSEL** button. A drive with the name **RPI-RP2** opens on your computer.
-6. Copy the `.uf2` file to the **RPI-RP2** drive.
-7. Wait. The Pico restarts automatically, and Acid Drip starts.
+A `.uf2` file is the firmware, ready to use. You do not need the Arduino IDE to install it. You copy it to the Pico, as you copy a file to a USB stick.
+
+### Step 1: Download the file
+
+1. Go to the [latest release](https://github.com/lonesoulsurfer/Acid_Drip_Bassline_and_Drum_Synth/releases/latest).
+2. In the **Assets** list, click the `.uf2` file for the version that you want. Your browser downloads it.
 
 The release has one `.uf2` file for each firmware version. Use the newest version, unless you want an older one. V5 has all the V4 functions, and it adds DRIFT, pattern chaining, MIX EDIT and a custom drum pattern.
+
+### Step 2: Copy the file to the Pico
+
+Use method A if you can reach the **BOOTSEL** button on the Pico. Use method B if the Pico is inside a case.
+
+#### Method A: with the BOOTSEL button
+
+1. Disconnect the USB cable from Acid Drip.
+2. Push and hold the **BOOTSEL** button. It is the small white button on the Pico.
+3. While you hold the button, connect the USB cable to your computer.
+4. Release the button. A drive with the name **RPI-RP2** opens on your computer.
+5. Drag the `.uf2` file onto the **RPI-RP2** drive.
+6. Wait about 5 seconds. The drive closes, the Pico restarts, and Acid Drip starts.
+
+#### Method B: without the BOOTSEL button (Windows)
+
+This method uses a tool from the Arduino IDE. You must install the Arduino IDE and the **Raspberry Pi Pico/RP2040** board package first. See [Software](#software-only-if-you-compile-the-firmware-yourself).
+
+1. Connect Acid Drip to your computer with the USB cable.
+2. Close the Arduino IDE.
+3. Find the COM port of Acid Drip. Open **Device Manager** and look under **Ports (COM & LPT)**. An example is `COM5`.
+4. Open the folder that has the `.uf2` file in File Explorer.
+5. Click in the address bar. Type `powershell` and push **Enter**. A PowerShell window opens in that folder.
+6. Paste these lines. Change `COM5` to your COM port, and change the file name to the name of your file.
+7. Push **Enter**.
+
+```powershell
+$base = "$env:LOCALAPPDATA\Arduino15\packages\rp2040"
+$py = (Get-ChildItem "$base\tools\pqt-python3" -Recurse -Filter "python3*.exe" | Select-Object -First 1).FullName
+$tool = (Get-ChildItem "$base\hardware\rp2040" -Recurse -Filter uf2conv.py | Sort-Object FullName -Descending | Select-Object -First 1).FullName
+& $py -I $tool --serial COM5 --family RP2040 --deploy ".\Acid_Drip_Drum_Acid_Drift_V5-v5.1.0.uf2"
+```
+
+8. Wait about 10 seconds. Acid Drip restarts with the new firmware.
+
+This is the same method that the Arduino IDE uses when you click **Upload**.
+
+> **Note:** Your saved patterns are at the end of the flash memory. A new `.uf2` file does not usually erase them. If your patterns are important to you, write them down before you install new firmware.
 
 ## Compile the firmware (for developers)
 
